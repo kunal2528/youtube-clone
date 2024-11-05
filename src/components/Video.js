@@ -7,7 +7,7 @@ import { abbreviateNumber } from 'js-abbreviation-number';
 function Video({video}) {
   
   return (
-    <div className=''>
+    <div>
       <Link to={`/video/${video.videoId}`}>
         <div className='flex flex-col'>
           <div className='relative h-48 md:h-56 rounded-xl hover:rounded-none duration-200 overflow-hidden'>

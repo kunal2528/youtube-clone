@@ -10,6 +10,7 @@ function Search() {
 
   useEffect(() => {
     fetchSearchResults();
+    //eslint-disable-next-line
   }, [searchQuery]);
 
   const fetchSearchResults = () => {
@@ -20,11 +21,11 @@ function Search() {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="mt-24 flex flex-row h-[calc(100%-56px)]">
         <Sidebar />
-        <div className="grow h-[calc(100vh-6.625rem)] overflow-y-scroll overflow-x-hidden">
-          <div className=" grid grid-cols-1 gap-2 p-2">
+        <div className="w-[85%] grow h-[calc(100vh-6.625rem)] overflow-y-scroll overflow-x-hidden">
+          <div className="grid grid-cols-1 gap-2 p-2">
             {result?.map((item, index) => {
               if (item?.type !== "video") return false;
               return <SearchCard key={index} video={item?.video} />;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { GoHistory, GoHome, GoLightBulb } from "react-icons/go";
 import { SiYoutubekids, SiYoutubeshorts } from "react-icons/si";
-import { MdOutlineFeedback, MdOutlineSubscriptions } from "react-icons/md";
+import { MdOutlineSubscriptions } from "react-icons/md";
 import { AiOutlineLike } from "react-icons/ai";
-import { FaChevronRight, FaFire, FaYoutube } from "react-icons/fa6";
+import { FaFire, FaYoutube } from "react-icons/fa6";
 import { MdOutlineWatchLater } from "react-icons/md";
 import { SiYoutubemusic } from "react-icons/si";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
@@ -16,13 +16,12 @@ import { PiLightbulbLight } from "react-icons/pi";
 import { SiStylelint } from "react-icons/si";
 import { MdPodcasts } from "react-icons/md";
 import { RiYoutubeLine } from 'react-icons/ri';
-import { CiSettings } from 'react-icons/ci';
-import { FiFlag } from 'react-icons/fi';
-import { IoMdHelpCircle } from 'react-icons/io';
 import { useUtils } from '../context/UtilsContext';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
-  const {isSidebar, mobileShow, setMobileShow} = useUtils();
+  const {mobileShow, setMobileShow} = useUtils();
+  const navigate = useNavigate();
 
   const sidebarItems = [
     {
@@ -173,11 +172,15 @@ function Sidebar() {
     )
   }
 
+  const searchHandler = (item) => {
+    navigate(`/search/${item}`);
+  }
+
   return (
     <>
       <div className={`${
         mobileShow 
-          ? "fixed top-0 left-0 bottom-0 transition-all duration-300 bg-white z-40 h-screen w-[70%] sm:w-[30%]" 
+          ? "fixed top-0 left-0 bottom-0 transition-all duration-300 bg-white z-40 h-screen w-[60%] sm:w-[30%] py-4" 
           : "hidden w-[15%] h-[calc(100vh-6.625rem)]" 
         } xl:static xl:block px-2 lg:px-6 overflow-y-scroll overflow-x-hidden scrollbar-thin`}>
         <div className='space-y-3 items-center'>
@@ -186,8 +189,8 @@ function Sidebar() {
               <h1 className='font-bold'>{group.groupName}</h1>
               {
                 group.groupItems.map(item => (
-                  <div key={item.id} className='space-x-6 flex items-center hover:bg-gray-300 duration-300 rounded-xl p-1 my-2'>
-                    <div className='text-sm cursor-pointer'>{item.icon}</div>
+                  <div key={item.id} className='space-x-6 flex items-center hover:bg-gray-300 duration-300 rounded-md px-1 py-2 my-2' onClick={()=>searchHandler(item.name)}>
+                    <div className='text-xl cursor-pointer'>{item.icon}</div>
                     <span className='text-sm cursor-pointer'>{item.name}</span>
                   </div>
                 ))

@@ -57,10 +57,10 @@ function Navbar() {
   }
 
   return ( 
-    <div className='flex justify-between px-6 py-2 fixed top-0 bg-white w-[100%]'>
+    <div className='flex justify-between px-6 py-2 fixed z-40 top-0 bg-white w-[100%]'>
       <div className='flex items-center space-x-4'>
         <AiOutlineMenu className='text-xl cursor-pointer' onClick={handleSideBar} />
-        <img src={Logo} alt="logo" className='w-28 cursor-pointer' onClick={navigateYoutube} />
+        <img src={Logo} alt="logo" className='w-20 md:w-28 cursor-pointer' onClick={navigateYoutube} />
       </div>
       <div className='md:flex w-[45%] hidden'>
         <div className='w-[100%] px-3 py-2 border border-gray-400 rounded-l-full'>
@@ -71,7 +71,7 @@ function Navbar() {
         </button>
         <IoMdMic size={'42px'} className='ml-3 border rounded-full p-1 border-gray-400 cursor-pointer hover:bg-gray-200 duration-200' />
       </div>
-      <div className='flex space-x-4'>
+      <div className='flex space-x-1 md:space-x-4'>
         <IoIosSearch size={'42px'} className='md:hidden hover:border rounded-full p-2 cursor-pointer hover:bg-gray-200 duration-200' onClick={() => setSearchBar(!searchBar)} />
         <RiVideoAddLine size={'42px'} className='hover:border rounded-full p-2 cursor-pointer hover:bg-gray-200 duration-200' />
         <AiOutlineBell size={'42px'} className='ml-3 hover:border rounded-full p-2 cursor-pointer hover:bg-gray-200 duration-200' />

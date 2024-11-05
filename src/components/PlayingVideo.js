@@ -6,6 +6,11 @@ import { AiOutlineLike } from "react-icons/ai";
 import { abbreviateNumber } from "js-abbreviation-number";
 import SuggestedVideo from "./SuggestedVideo";
 import { BsFillCheckCircleFill } from "react-icons/bs";
+import moment from "moment";
+import { BiDislike } from "react-icons/bi";
+import { IoIosShareAlt } from "react-icons/io";
+import { HiDownload } from "react-icons/hi";
+import { CgProfile } from "react-icons/cg";
 
 function PlayingVideo() {
   const [video, setVideo] = useState();
@@ -49,14 +54,18 @@ function PlayingVideo() {
           </div>
           <div className="flex justify-between flex-col md:flex-row mt-4">
             <div className="flex ">
-              <div className="flex items-start">
+              <div className="flex items-center">
+              {video?.author?.avatar?.length > 0 ? 
                 <div className="flex h-11 w-11 rounded-full overflow-hidden">
-                  {video?.author?.avatar?.length > 0 && <img
+                  <img
                     className="h-full w-full object-cover"
                     src={video?.author?.avatar[0]?.url}
                     alt='avatar'
-                  />}
-                </div>
+                  /> 
+                </div> : 
+                <div className="flex overflow-hidden">
+                  <CgProfile className="text-3xl md:text-4xl" />
+                </div>}
               </div>
               <div className="flex space-x-5">
                 <div className="flex flex-col ml-3">
@@ -70,23 +79,39 @@ function PlayingVideo() {
                     {video?.author?.stats?.subscribersText}
                   </div>
                 </div>
-                <span className="mt-1 text-center bg-red-500 px-3 pt-2 rounded-full text-white cursor-pointer hover:bg-red-700 duration-200 ">
+                <span className="mt-1 text-center bg-red-700 px-3 p-1 md:pt-2 rounded-full text-white cursor-pointer hover:bg-red-800 duration-200 ">
                   Subscribe
                 </span>
               </div>
             </div>
             <div className="flex mt-4 md:mt-0">
-              <div className="flex items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15]">
-                <AiOutlineLike className="text-xl mr-2" />
-                {`${abbreviateNumber(video?.stats?.likes, 2)} Likes`}
+              <div className="flex items-center justify-center h-11 p-4 rounded-l-3xl bg-gray-200 hover:border-gray-300 hover:border cursor-pointer">
+                <AiOutlineLike className="text-lg md:text-2xl mr-2" />
+                {`${abbreviateNumber(video?.stats?.likes, 2)}`}
               </div>
-              <div className="flex items-center justify-center h-11 px-6 rounded-3xl bg-white/[0.15] ml-4">
-                {`${abbreviateNumber(video?.stats?.views, 2)} Views`}
+              <div className="flex items-center justify-center h-11 p-4 mr-1 border-l border-gray-300 rounded-r-3xl bg-gray-200 hover:border-gray-300 hover:border cursor-pointer">
+                <BiDislike className="text-lg md:text-2xl" />
+              </div>
+              <div className="flex items-center justify-center h-11 p-4 mx-1 rounded-3xl bg-gray-200 hover:border-gray-300 hover:border cursor-pointer">
+                <IoIosShareAlt className="text-lg md:text-2xl mr-2" />
+                Share
+              </div>
+              <div className="flex items-center justify-center h-11 p-4 mx-1 rounded-3xl bg-gray-200 hover:border-gray-300 hover:border cursor-pointer">
+                <HiDownload className="text-lg md:text-2xl mr-2" />
+                Download
               </div>
             </div>
           </div>
           <div className="p-4 bg-gray-100 rounded-xl mt-4 text-sm">
-            {video?.description}
+            <div className="flex items-center">
+              <div className="flex h-11 pr-2 rounded-3xl bg-white/[0.15]">
+                {`${abbreviateNumber(video?.stats?.views, 2)} Views`}
+              </div>
+              <div className="flex h-11 rounded-3xl bg-white/[0.15]">
+                {moment(video?.publishedDate, "YYYYMMDD").fromNow()}
+              </div>
+            </div>
+            {video?.description?.length > 200 ? video?.description.slice(0, 200) + " ...more" : video?.description}
           </div>
           <div className="flex gap-x-6 font-semibold rounded-xl mt-4 text-xl">
             {video?.stats?.comments} <p>Comments</p>
