@@ -14,7 +14,6 @@ import { CgProfile } from "react-icons/cg";
 
 function PlayingVideo() {
   const [video, setVideo] = useState();
-  console.log(video);
   
   const [realatedVideo, setRelativeVideo] = useState();
   const { id } = useParams();
@@ -22,7 +21,7 @@ function PlayingVideo() {
   useEffect(() => {
     fetchVideoDetails();
     fetchRelatedVideo();
-  }, [id]);
+  }, []);
 
   const fetchVideoDetails = () => {
     fetchData(`video/details/?id=${id}`).then((res) => {
