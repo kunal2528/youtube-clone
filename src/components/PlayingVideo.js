@@ -21,7 +21,8 @@ function PlayingVideo() {
   useEffect(() => {
     fetchVideoDetails();
     fetchRelatedVideo();
-  }, []);
+    //eslint-disable-next-line
+  }, [id]);
 
   const fetchVideoDetails = () => {
     fetchData(`video/details/?id=${id}`).then((res) => {
